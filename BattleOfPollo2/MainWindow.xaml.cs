@@ -26,16 +26,18 @@ namespace BattleOfPollo2
         {
             // Obtengo el valor del textBox dmg
             string dmgText = dmgTextBox.Text;
-            // double dmg = double.Parse(dmgText);
             double dmgDouble;
 
+            // Obtengo el valor del textBox def
             string defText = dmgTextBox.Text;
-            // double dmg = double.Parse(dmgText);
             double defDouble;
 
+            // Intento parsear ambos valores
             bool parseoDmg = double.TryParse(dmgText, out dmgDouble);
             bool parseoDef = double.TryParse(defText, out defDouble);
-            if (parseoDmg && parseoDef)
+
+            
+            if (parseoDmg && parseoDef) // Si se parsea correctamente
             {
                 // Se hace el calculo del daño recibido
                 double resultado = (dmgDouble) - (defDouble * 0.6);
@@ -43,16 +45,16 @@ namespace BattleOfPollo2
                 // Redondeamos el resultado
                 double resultRounded = Math.Round(resultado);
 
-                if (resultRounded < 0)
+                if (resultRounded < 0) // Si el valor da menos de 0 muestro en pantalla 0 (como daño minimo recibido)
                 {
                     lblRes.Content = "Daño recibido: " + 0;
                 }
-                else
+                else // Sino muestro en pantalla el daño recibido
                 {
                     lblRes.Content = "Daño recibido: " + resultRounded.ToString();
                 }
-            }
-            else
+            } 
+            else // Sino se parsea correctamente muestro en pantalla mensajes de errores
             {
                 lblRes.Content = "¡ERROR!";
                 MessageBox.Show("¡Error! Ingresa formato numérico PELOTUDO");
