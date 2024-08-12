@@ -7,13 +7,26 @@
         mc:Ignorable="d"
         Title="Battle Of Pollo" Height="600" Width="768">
     <Grid>
+        <!-- Titulo -->
         <Label x:Name="title" Content="Battle Of Pollo" HorizontalAlignment="Center" Margin="0,10,0,0" VerticalAlignment="Top" FontSize="32" FontFamily="Consolas" Height="47" Width="274"/>
+
+        <!-- Label de los TextBox -->
         <Label x:Name="dmgLabel" Content="Daño:" HorizontalAlignment="Left" Margin="267,85,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Consolas" Height="33" Width="153"/>
         <Label x:Name="defLabel" Content="Defensa:" HorizontalAlignment="Left" Margin="404,83,0,0" VerticalAlignment="Top" FontSize="20" Height="37" Width="187" FontFamily="Consolas"/>
+        <Label x:Name="dmgBonusLabel" Content="Bon. daño:" HorizontalAlignment="Left" Margin="264,154,0,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="20"/>
+        <Label x:Name="defBonusLabel" Content="Bon. def:" HorizontalAlignment="Left" Margin="404,152,0,0" VerticalAlignment="Top" FontFamily="Consolas" FontSize="20"/>
+
+        <!-- TextBox -->
         <TextBox x:Name="dmgTextBox" HorizontalAlignment="Left" Margin="267,120,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Height="18"/>
-        <TextBox x:Name="defTextBox" HorizontalAlignment="Left" Margin="404,120,0,0" VerticalAlignment="Top" Width="100
-                 " Height="18" TextAlignment="Left"/>
-        <Button Content="Calcular daño" HorizontalAlignment="Center" Margin="0,161,0,0" VerticalAlignment="Top" Height="31" Width="104" FontSize="14" BorderThickness="2,2,2,2" Click="Button_Click"/>
-        <Label x:Name="lblRes" Content="" HorizontalAlignment="Left" Margin="34,227,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <TextBox x:Name="defTextBox" HorizontalAlignment="Left" Margin="404,120,0,0" VerticalAlignment="Top" Width="100" Height="18" TextAlignment="Left"/>
+        <TextBox x:Name="dmgBonusTextBox" HorizontalAlignment="Left" Margin="267,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Text="0"/>
+        <TextBox x:Name="defBonusTextBox" HorizontalAlignment="Left" Margin="404,185,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100" Text="0"/>
+
+        <!-- Button que hace el calculo -->
+        <Button Content="Calcular daño" HorizontalAlignment="Center" Margin="0,251,0,0" VerticalAlignment="Top" Height="31" Width="104" FontSize="14" BorderThickness="2,2,2,2" Click="Button_Click"/>
+
+        <!-- Label que muestra el resultado -->
+        <Label x:Name="lblRes" Content="" HorizontalAlignment="Left" Margin="10,261,0,0" VerticalAlignment="Top" FontSize="24"/>
+
     </Grid>
 </Window>
