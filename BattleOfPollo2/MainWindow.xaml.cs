@@ -60,19 +60,6 @@ namespace BattleOfPollo2
                 MessageBox.Show("¡Error! Ingresa formato numérico PELOTUDO");
             }
 
-            
-
-
-
-
-
-
-
-            
-
-            
-            
-            
         }
     }
 }
