@@ -22,65 +22,98 @@ namespace BattleOfPollo2
             InitializeComponent();
         }
 
+
+        private double GetDamageValue()
+        {
+            return GetDoubleValue(dmgTextBox.Text);
+        }
+
+        private double GetDefenseValue()
+        {
+            return GetDoubleValue(defTextBox.Text);
+        }
+
+        private double GetBonusDamageValue()
+        {
+            return GetDoubleValue(dmgBonusTextBox.Text);
+        }
+
+        private double GetBonusDefenseValue()
+        {
+            return GetDoubleValue(defBonusTextBox.Text);
+        }
+
+        private double GetDamageIncrease(double porcentaje)
+        {
+            double valorPorcentajeDmg = GetDoubleValue(porcentajeDmg.Text);
+            double aumento = valorPorcentajeDmg * porcentajeDecimal;
+        }
+
+        private double GetDoubleValue(string text)
+        {
+            double value;
+            if (double.TryParse(text, out value))
+            {
+                return value;
+            }
+            else
+            {
+                MessageBox.Show("¡Error! Ingresa formato numérico PELOTUDO");
+                return 0; // Or throw an exception for stricter error handling
+            }
+        }
+
+        private double CalculateDamage(double damage, double defense, double bonusDamage, double bonusDefense, double damageIncrease)
+        {
+            double netDamage = damage + bonusDamage + damageIncrease;
+            double netDefense = defense + bonusDefense;
+            double reducedDamage = netDamage - (netDefense * 0.6);
+            return Math.Max(0, reducedDamage); // Ensure damage is non-negative
+        }
+
+
+        private void CalculateDamageReceived()
+        {
+            double damage = GetDamageValue();
+            double defense = GetDefenseValue();
+            double bonusDamage = GetBonusDamageValue();
+            double bonusDefense = GetBonusDefenseValue();
+            double damageIncrease = GetDamageIncrease(porcentajeAumento);
+
+            double result = damage - (defense * 0.6) + (bonusDamage - bonusDefense);
+            double resultRounded = Math.Round(result);
+
+            if (resultRounded < 0)
+            {
+                lblRes.Content = "Daño recibido: " + 0;
+            }
+            else
+            {
+                lblRes.Content = "Daño recibido: " + resultRounded.ToString();
+            }
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // VARIABLES
-
-            // Obtengo el valor del TextBox dmg
-            string dmgText = dmgTextBox.Text;
-            double dmgDouble;
-
-            // Obtengo el valor del TextBox def
-            string defText = dmgTextBox.Text;
-            double defDouble;
-
-            // Obtengo el valor del TextBox Bonus Damage 
-            string dmgBonus = dmgBonusTextBox.Text;
-            double dmgBonusDouble;
-
-            // Obtengo el valor del Textbos Bonus defense
-            string defBonus = defBonusTextBox.Text;
-            double defBonusDouble;
-
-
-            // COMPROBACIÓN DEL PARSEO
-
-
-            // Intento parsear los valores
-            bool parseoDmg = double.TryParse(dmgText, out dmgDouble);
-            bool parseoDef = double.TryParse(defText, out defDouble);
-            bool parseoBonusDmg = double.TryParse(dmgBonus, out dmgBonusDouble);
-            bool parseoBonusDef = double.TryParse(defBonus, out defBonusDouble);
-
-            double resultado; // Resultado Final
-            double resultRounded; // Redondeo del resultado final
-
-            #region
-
-            if (parseoDmg && parseoDef && parseoBonusDmg && parseoBonusDef) // Si se parsea correctamente
-            {
-                // Se hace el calculo del daño recibido
-                resultado = (dmgDouble) - (defDouble * 0.6);
-                resultado += (dmgBonusDouble - defBonusDouble);
-
-                // Redondeamos el resultado
-                resultRounded = Math.Round(resultado);
-
-                if (resultRounded < 0) // Si el valor da menos de 0 muestro en pantalla 0 (como daño minimo recibido)
-                {
-                    lblRes.Content = "Daño recibido: " + 0;
-                }
-                else // Sino muestro en pantalla el daño recibido
-                {
-                    lblRes.Content = "Daño recibido: " + resultRounded.ToString();
-                }
-            }
-            else // Sino se parsea correctamente muestro en pantalla mensajes de errores
-            {
-                lblRes.Content = "¡ERROR!";
-                MessageBox.Show("¡Error! Ingresa formato numérico PELOTUDO");
-            }
-            #endregion
+            CalculateDamageReceived();
         }
+
+        /* private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+         {
+             List<string> characters = new List<string>() { "Umbra", "Rinach", "Corvus", "Balhaar", "Aila", "Norfin", "Eiron", "Maneki", "Kaeru" };
+
+             characters.Sort();
+             ComboBox comboBox = sender as ComboBox;
+             comboBox.Items.Clear();
+
+             foreach (string character in characters)
+             {
+                 ComboBoxItem item = new ComboBoxItem();
+                 item.Content = character;
+                 comboBox.Items.Add(item);
+             }
+         }*/
+
+
     }
 }
